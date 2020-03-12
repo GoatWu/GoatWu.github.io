@@ -6,16 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>tags | Hexo</title>
+  <title>4.1.黑科技-读入优化 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://yoursite.com/tags/index.html">
+  <meta name="description" content="4.1. 读入优化4.1.1. 快速度入挂1234567int read()&amp;#123;    int f &#x3D; 1, x &#x3D; 0; char ch &#x3D; getchar();    while(ch &gt; &#39;9&#39; || ch &lt; &#39;0&#39;) &amp;#123;if(ch &#x3D;&#x3D; &#39;-&#39;) f &#x3D; -1; ch &#x3D; getchar();&amp;#125;    while(ch &gt;&#x3D; &#39;0&#39; &amp;amp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="4.1.黑科技-读入优化">
+<meta property="og:url" content="http://yoursite.com/2020/03/12/4-1-%E8%AF%BB%E5%85%A5%E4%BC%98%E5%8C%96/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="4.1. 读入优化4.1.1. 快速度入挂1234567int read()&amp;#123;    int f &#x3D; 1, x &#x3D; 0; char ch &#x3D; getchar();    while(ch &gt; &#39;9&#39; || ch &lt; &#39;0&#39;) &amp;#123;if(ch &#x3D;&#x3D; &#39;-&#39;) f &#x3D; -1; ch &#x3D; getchar();&amp;#125;    while(ch &gt;&#x3D; &#39;0&#39; &amp;amp">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-03-11T11:45:41.000Z">
-<meta property="article:modified_time" content="2020-03-11T11:46:13.716Z">
+<meta property="article:published_time" content="2020-03-12T01:46:41.000Z">
+<meta property="article:modified_time" content="2020-03-12T01:47:25.727Z">
 <meta property="article:author" content="GoatWu">
+<meta property="article:tag" content="ACM">
+<meta property="article:tag" content="数学模版">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
@@ -160,27 +164,32 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+            <article id="post-4-1-读入优化" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      tags
+      4.1.黑科技-读入优化
     </h1>
   
 
         
-        <a href="/tags/index.html" class="archive-article-date">
-  	<time datetime="2020-03-11T11:45:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-11</time>
+        <a href="/2020/03/12/4-1-%E8%AF%BB%E5%85%A5%E4%BC%98%E5%8C%96/" class="archive-article-date">
+  	<time datetime="2020-03-12T01:46:41.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-03-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h2 id="4-1-读入优化"><a href="#4-1-读入优化" class="headerlink" title="4.1. 读入优化"></a>4.1. 读入优化</h2><h3 id="4-1-1-快速度入挂"><a href="#4-1-1-快速度入挂" class="headerlink" title="4.1.1. 快速度入挂"></a>4.1.1. 快速度入挂</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> f = <span class="number">1</span>, x = <span class="number">0</span>; <span class="keyword">char</span> ch = getchar();</span><br><span class="line">    <span class="keyword">while</span>(ch &gt; <span class="string">'9'</span> || ch &lt; <span class="string">'0'</span>) &#123;<span class="keyword">if</span>(ch == <span class="string">'-'</span>) f = <span class="number">-1</span>; ch = getchar();&#125;</span><br><span class="line">    <span class="keyword">while</span>(ch &gt;= <span class="string">'0'</span> &amp;&amp; ch &lt;= <span class="string">'9'</span>) &#123;x = (x&lt;&lt;<span class="number">3</span>)+(x&lt;&lt;<span class="number">1</span>)+(ch^<span class="number">48</span>); ch = getchar();&#125;</span><br><span class="line">    <span class="keyword">return</span> f * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-1-2-大整数取模"><a href="#4-1-2-大整数取模" class="headerlink" title="4.1.2. 大整数取模"></a>4.1.2. 大整数取模</h3><h4 id="4-1-2-1-读入时取模"><a href="#4-1-2-1-读入时取模" class="headerlink" title="4.1.2.1. 读入时取模"></a>4.1.2.1. 读入时取模</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getmod</span><span class="params">(<span class="keyword">int</span> mo)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">0</span>; <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c = getchar()));</span><br><span class="line">    <span class="keyword">for</span>(; <span class="built_in">isdigit</span>(c); c = getchar())</span><br><span class="line">    &#123;</span><br><span class="line">        b = b * <span class="number">10</span> + c - <span class="string">'0'</span>;</span><br><span class="line">        <span class="keyword">if</span>(b &gt;= mo) b %= mo;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-1-2-2-读入后取模"><a href="#4-1-2-2-读入后取模" class="headerlink" title="4.1.2.2. 读入后取模"></a>4.1.2.2. 读入后取模</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ll <span class="title">Int</span><span class="params">(ll p, <span class="keyword">char</span> *ch)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll res = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> pos = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(ch[pos])) pos++;</span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">isdigit</span>(ch[pos]))</span><br><span class="line">    &#123;</span><br><span class="line">       res = (res * <span class="number">10</span> + ch[pos] - <span class="string">'0'</span>) % p;</span><br><span class="line">        pos++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
@@ -214,6 +223,21 @@
     <div class="article-info article-info-index">
       
       
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ACM</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数学模版</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
       
 
       
@@ -264,7 +288,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/tags/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/03/12/4-1-%E8%AF%BB%E5%85%A5%E4%BC%98%E5%8C%96/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -276,6 +300,16 @@
 </article>
 
   
+<nav id="article-nav">
+  
+  
+    <a href="/2020/03/12/4-2-STL%E7%9A%84%E7%A5%9E%E5%A5%87%E5%BA%94%E7%94%A8/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">4.2.黑科技-STL的神奇应用</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -297,7 +331,7 @@
                 </span>
                 <span class="tooltip-content">
                     <div class="toc-article">
-                    目录，不存在的…
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-读入优化"><span class="toc-number">1.</span> <span class="toc-text">4.1. 读入优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-1-快速度入挂"><span class="toc-number">1.1.</span> <span class="toc-text">4.1.1. 快速度入挂</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-2-大整数取模"><span class="toc-number">1.2.</span> <span class="toc-text">4.1.2. 大整数取模</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-1-读入时取模"><span class="toc-number">1.2.1.</span> <span class="toc-text">4.1.2.1. 读入时取模</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-2-读入后取模"><span class="toc-number">1.2.2.</span> <span class="toc-text">4.1.2.2. 读入后取模</span></a></li></ol></li></ol></li></ol>
                     </div>
                 </span>
             </div>
@@ -339,7 +373,7 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
