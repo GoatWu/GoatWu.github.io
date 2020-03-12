@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>4.2.黑科技-STL的神奇应用 | Hexo</title>
+  <title>4.2.黑科技-STL的神奇应用 | GoatWu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="4.2. STL的神奇应用4.2.1. 哈希表4.2.1.1. 手写哈希表123456789101112131415161718192021222324252627282930313233&#x2F;&#x2F; 用法和 unorder_map 一样（除了 tb[k]&#x3D;p 改成 tb.add(k,p)）&#x2F;&#x2F; 支持 a &#x3D; tb[tmp] 的用法#define HASHMOD 233333#define HASHSIZ">
+  <meta name="description" content="4.2. STL的神奇应用4.2.1. 哈希表">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4.2.黑科技-STL的神奇应用">
 <meta property="og:url" content="http://yoursite.com/2020/03/12/4-2-STL%E7%9A%84%E7%A5%9E%E5%A5%87%E5%BA%94%E7%94%A8/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="4.2. STL的神奇应用4.2.1. 哈希表4.2.1.1. 手写哈希表123456789101112131415161718192021222324252627282930313233&#x2F;&#x2F; 用法和 unorder_map 一样（除了 tb[k]&#x3D;p 改成 tb.add(k,p)）&#x2F;&#x2F; 支持 a &#x3D; tb[tmp] 的用法#define HASHMOD 233333#define HASHSIZ">
+<meta property="og:site_name" content="GoatWu">
+<meta property="og:description" content="4.2. STL的神奇应用4.2.1. 哈希表">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-12T01:44:16.000Z">
-<meta property="article:modified_time" content="2020-03-12T01:45:50.367Z">
+<meta property="article:modified_time" content="2020-03-12T08:27:16.559Z">
 <meta property="article:author" content="GoatWu">
 <meta property="article:tag" content="ACM">
 <meta property="article:tag" content="数学模版">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="GoatWu" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -184,7 +184,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="4-2-STL的神奇应用"><a href="#4-2-STL的神奇应用" class="headerlink" title="4.2. STL的神奇应用"></a>4.2. STL的神奇应用</h2><h3 id="4-2-1-哈希表"><a href="#4-2-1-哈希表" class="headerlink" title="4.2.1. 哈希表"></a>4.2.1. 哈希表</h3><h4 id="4-2-1-1-手写哈希表"><a href="#4-2-1-1-手写哈希表" class="headerlink" title="4.2.1.1. 手写哈希表"></a>4.2.1.1. 手写哈希表</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用法和 unorder_map 一样（除了 tb[k]=p 改成 tb.add(k,p)）</span></span><br><span class="line"><span class="comment">// 支持 a = tb[tmp] 的用法</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HASHMOD 233333</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HASHSIZE 1000000</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">HashTable</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> head[HASHMOD];</span><br><span class="line">    <span class="keyword">int</span> key[HASHSIZE + <span class="number">10</span>], val[HASHSIZE + <span class="number">10</span>], nxt[HASHSIZE + <span class="number">10</span>], cnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(head, <span class="number">0</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">count</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> k)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[k % HASHMOD]; i; i = nxt[i])</span><br><span class="line">            <span class="keyword">if</span> (key[i] == k) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">operator</span>[](<span class="keyword">const</span> <span class="keyword">int</span> k) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[k % HASHMOD]; i; i = nxt[i])</span><br><span class="line">            <span class="keyword">if</span> (key[i] == k) <span class="keyword">return</span> val[i];</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p = k % HASHMOD;</span><br><span class="line">        nxt[++cnt] = head[p];</span><br><span class="line">        key[cnt] = k;</span><br><span class="line">        val[cnt] = v;</span><br><span class="line">        head[p] = cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;tb;</span><br></pre></td></tr></table></figure>
+        <h2 id="4-2-STL的神奇应用"><a href="#4-2-STL的神奇应用" class="headerlink" title="4.2. STL的神奇应用"></a>4.2. STL的神奇应用</h2><h3 id="4-2-1-哈希表"><a href="#4-2-1-哈希表" class="headerlink" title="4.2.1. 哈希表"></a>4.2.1. 哈希表</h3><a id="more"></a>
+<h4 id="4-2-1-1-手写哈希表"><a href="#4-2-1-1-手写哈希表" class="headerlink" title="4.2.1.1. 手写哈希表"></a>4.2.1.1. 手写哈希表</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 用法和 unorder_map 一样（除了 tb[k]=p 改成 tb.add(k,p)）</span></span><br><span class="line"><span class="comment">// 支持 a = tb[tmp] 的用法</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HASHMOD 233333</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> HASHSIZE 1000000</span></span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">struct</span> <span class="title">HashTable</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> head[HASHMOD];</span><br><span class="line">    <span class="keyword">int</span> key[HASHSIZE + <span class="number">10</span>], val[HASHSIZE + <span class="number">10</span>], nxt[HASHSIZE + <span class="number">10</span>], cnt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">memset</span>(head, <span class="number">0</span>, <span class="keyword">sizeof</span>(head));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">count</span><span class="params">(<span class="keyword">const</span> <span class="keyword">int</span> k)</span> </span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[k % HASHMOD]; i; i = nxt[i])</span><br><span class="line">            <span class="keyword">if</span> (key[i] == k) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> <span class="keyword">operator</span>[](<span class="keyword">const</span> <span class="keyword">int</span> k) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = head[k % HASHMOD]; i; i = nxt[i])</span><br><span class="line">            <span class="keyword">if</span> (key[i] == k) <span class="keyword">return</span> val[i];</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> k, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> p = k % HASHMOD;</span><br><span class="line">        nxt[++cnt] = head[p];</span><br><span class="line">        key[cnt] = k;</span><br><span class="line">        val[cnt] = v;</span><br><span class="line">        head[p] = cnt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;tb;</span><br></pre></td></tr></table></figure>
 
 <h4 id="4-2-1-2-unordered-map哈希函数加速"><a href="#4-2-1-2-unordered-map哈希函数加速" class="headerlink" title="4.2.1.2. unordered-map哈希函数加速"></a>4.2.1.2. unordered-map哈希函数加速</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">custom_hash</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">uint64_t</span> <span class="title">splitmix64</span><span class="params">(<span class="keyword">uint64_t</span> x)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// http://xorshift.di.unimi.it/splitmix64.c</span></span><br><span class="line">        x += <span class="number">0x9e3779b97f4a7c15</span>;</span><br><span class="line">        x = (x ^ (x &gt;&gt; <span class="number">30</span>)) * <span class="number">0xbf58476d1ce4e5b9</span>;</span><br><span class="line">        x = (x ^ (x &gt;&gt; <span class="number">27</span>)) * <span class="number">0x94d049bb133111eb</span>;</span><br><span class="line">        <span class="keyword">return</span> x ^ (x &gt;&gt; <span class="number">31</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">size_t</span> <span class="title">operator</span><span class="params">()</span><span class="params">(<span class="keyword">uint64_t</span> x)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> <span class="keyword">const</span> <span class="keyword">uint64_t</span> FIXED_RANDOM = </span><br><span class="line">            chrono::steady_clock::now().time_since_epoch().count();</span><br><span class="line">        <span class="keyword">return</span> splitmix64(x + FIXED_RANDOM);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">/*    </span></span><br><span class="line"><span class="comment">    这样写实测差别不大</span></span><br><span class="line"><span class="comment">    size_t operator()(uint64_t x) const</span></span><br><span class="line"><span class="comment">    &#123;</span></span><br><span class="line"><span class="comment">        return splitmix64(x);</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">*/</span>    </span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">unordered_map</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>, custom_hash&gt; um;</span><br></pre></td></tr></table></figure>
 
@@ -360,6 +361,23 @@
   
 
   
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2020/03/12/4-2-STL%E7%9A%84%E7%A5%9E%E5%A5%87%E5%BA%94%E7%94%A8/",
+  owner: 'GoatWu',
+  repo: 'GoatWu.github.io',
+  oauth: {
+    client_id: '1498e659b3a70f51e104',
+    client_secret: '0358b5139e9ebd7c88452a795086ef744a710b2b',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
+  
 
 
           </div>
@@ -530,27 +548,19 @@ MathJax.Hub.Queue(function() {
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+              <a href="https://codeforces.com/team/56146" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>我们是 XMU-曾厝安幼儿园队</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+              <a href="https://codeforces.com/profile/GOATWU" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>GoatWu的codeforces</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+              <a href="https://codeforces.com/profile/DWAE86" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>csz的codeforces</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+              <a href="https://codeforces.com/profile/wh0816" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>wh的codeforces</a>
             </li>
           
         </ul>
@@ -561,7 +571,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;center&gt;XMU ACMer&lt;center/&gt;&lt;br/&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;center&gt;XMU ACMer&lt;center/&gt;&lt;br/&gt;Kindergarten 的数学选手</div>
   	  	
     	</section>
     

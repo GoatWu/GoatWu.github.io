@@ -6,23 +6,23 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>4.3.3.黑科技-BM线性递推-常系数齐次线性递推 | Hexo</title>
+  <title>4.3.3.黑科技-BM线性递推-常系数齐次线性递推 | GoatWu</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="4.3.3. 常系数齐次线性递推P4732 求一个满足 $k$ 阶齐次线性递推数列 ${a_i}$ 的第 $n$ 项，即：$$a_n&#x3D;\sum_{i&#x3D;1}^{k}f_i\cdot a_{n-i}$$注：以下算法中的 $solve()$ 函数可嵌套到BM中替代其 $solve()$ 函数。 1234567891011121314151617181920212223242526272829303132">
+  <meta name="description" content="4.3.3. 常系数齐次线性递推P4732 求一个满足 $k$ 阶齐次线性递推数列 ${a_i}$ 的第 $n$ 项，即：$$a_n&#x3D;\sum_{i&#x3D;1}^{k}f_i\cdot a_{n-i}$$注：以下算法中的 $solve()$ 函数可嵌套到BM中替代其 $solve()$ 函数。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="4.3.3.黑科技-BM线性递推-常系数齐次线性递推">
 <meta property="og:url" content="http://yoursite.com/2020/03/12/4-3-3-%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="4.3.3. 常系数齐次线性递推P4732 求一个满足 $k$ 阶齐次线性递推数列 ${a_i}$ 的第 $n$ 项，即：$$a_n&#x3D;\sum_{i&#x3D;1}^{k}f_i\cdot a_{n-i}$$注：以下算法中的 $solve()$ 函数可嵌套到BM中替代其 $solve()$ 函数。 1234567891011121314151617181920212223242526272829303132">
+<meta property="og:site_name" content="GoatWu">
+<meta property="og:description" content="4.3.3. 常系数齐次线性递推P4732 求一个满足 $k$ 阶齐次线性递推数列 ${a_i}$ 的第 $n$ 项，即：$$a_n&#x3D;\sum_{i&#x3D;1}^{k}f_i\cdot a_{n-i}$$注：以下算法中的 $solve()$ 函数可嵌套到BM中替代其 $solve()$ 函数。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-03-12T01:25:40.000Z">
-<meta property="article:modified_time" content="2020-03-12T01:31:26.671Z">
+<meta property="article:modified_time" content="2020-03-12T08:35:05.305Z">
 <meta property="article:author" content="GoatWu">
 <meta property="article:tag" content="ACM">
 <meta property="article:tag" content="数学模版">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="GoatWu" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -186,6 +186,8 @@
       
         <h3 id="4-3-3-常系数齐次线性递推"><a href="#4-3-3-常系数齐次线性递推" class="headerlink" title="4.3.3. 常系数齐次线性递推"></a>4.3.3. 常系数齐次线性递推</h3><p><a href="https://www.luogu.com.cn/problem/P4723" target="_blank" rel="noopener">P4732</a></p>
 <p>求一个满足 $k$ 阶齐次线性递推数列 ${a_i}$ 的第 $n$ 项，即：<br>$$<br>a_n=\sum_{i=1}^{k}f_i\cdot a_{n-i}<br>$$<br>注：以下算法中的 $solve()$ 函数可嵌套到BM中替代其 $solve()$ 函数。</p>
+<a id="more"></a>
+
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; Vec;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> Mo = <span class="number">998244353</span>;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> &amp;x, <span class="keyword">int</span> y)</span> </span>&#123; (x += y) &gt;= Mo &amp;&amp; (x -= Mo); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">dec</span><span class="params">(<span class="keyword">int</span> &amp;x, <span class="keyword">int</span> y)</span> </span>&#123; (x -= y) &lt; <span class="number">0</span> &amp;&amp; (x += Mo); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x &gt;= Mo ? x - Mo : x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">dec</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x &lt; <span class="number">0</span> ? x + Mo : x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Mod</span><span class="params">(<span class="keyword">int</span> &amp;x)</span> </span>&#123; x &gt;= Mo &amp;&amp; (x -= Mo); x &lt; <span class="number">0</span> &amp;&amp; (x += Mo); &#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">mul</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y, <span class="keyword">int</span> mo = Mo)</span> </span>&#123;<span class="keyword">return</span> <span class="number">1l</span>l * x * y % mo; &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">read</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pow</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> k, <span class="keyword">int</span> mo = Mo)</span> <span class="comment">// 普通快速幂模版</span></span></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Inv</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> mo = Mo)</span> </span>&#123; <span class="keyword">return</span> <span class="built_in">pow</span>(x, mo - <span class="number">2</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> NTT <span class="comment">// 省略NTT模版</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> NTT;</span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> Poly <span class="comment">// 需要用到的多项式模版</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">inline</span> Vec <span class="title">fix</span><span class="params">(Vec a, <span class="keyword">int</span> b)</span></span></span><br><span class="line">    Vec operator - (Vec a, Vec b)</span><br><span class="line">    Vec <span class="keyword">operator</span> *(Vec a, Vec b)</span><br><span class="line">    Vec <span class="keyword">operator</span> ~ (Vec a)</span><br><span class="line">    Vec <span class="keyword">operator</span> / (Vec a, Vec b)</span><br><span class="line">    Vec <span class="keyword">operator</span> % (Vec a, Vec b)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">print</span><span class="params">(Vec a)</span></span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> Poly;</span><br><span class="line">Vec a;</span><br><span class="line"></span><br><span class="line"><span class="function">Vec <span class="title">ksm</span><span class="params">(Vec a, <span class="keyword">int</span> b, Vec c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="function">Vec <span class="title">res</span><span class="params">(<span class="number">1</span>, <span class="number">1</span>)</span></span>;</span><br><span class="line">    <span class="keyword">for</span>(; b; b &gt;&gt;= <span class="number">1</span>, a = a * a % c) <span class="keyword">if</span>(b &amp; <span class="number">1</span>) res = res * a % c;</span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n, Vec a, Vec b)</span> <span class="comment">// a 系数 b 初值 b[n+1]=a[0]*b[n]...</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = (<span class="keyword">int</span>)a.size();</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) a[i] = (Mo - a[i]) % Mo;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) b[i] = (b[i] + Mo) % Mo;</span><br><span class="line">    reverse(a.begin(), a.end());</span><br><span class="line">    a.push_back(<span class="number">1</span>);</span><br><span class="line">    a = ksm(Vec(&#123;<span class="number">0</span>, <span class="number">1</span>&#125;), n, a);</span><br><span class="line">    a.resize(k);</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) add(ans, mul(a[i], b[i]));</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, k;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    Vec f(k), a(k);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) f[i] = read();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; k; i++) a[i] = read();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, solve(n, f, a));</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
@@ -358,6 +360,23 @@
   
 
   
+  <div id="gitment-ctn"></div> 
+<link rel="stylesheet" href="https://jjeejj.github.io/css/gitment.css">
+<script src="https://www.wenjunjiang.win/js/gitment.js"></script>
+<script>
+var gitment = new Gitment({
+  id: "http://yoursite.com/2020/03/12/4-3-3-%E5%B8%B8%E7%B3%BB%E6%95%B0%E9%BD%90%E6%AC%A1%E7%BA%BF%E6%80%A7%E9%80%92%E6%8E%A8/",
+  owner: 'GoatWu',
+  repo: 'GoatWu.github.io',
+  oauth: {
+    client_id: '1498e659b3a70f51e104',
+    client_secret: '0358b5139e9ebd7c88452a795086ef744a710b2b',
+  },
+})
+gitment.render('gitment-ctn')
+</script>
+
+  
 
 
           </div>
@@ -528,27 +547,19 @@ MathJax.Hub.Queue(function() {
         <ul class="search-ul">
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
+              <a href="https://codeforces.com/team/56146" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>我们是 XMU-曾厝安幼儿园队</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
+              <a href="https://codeforces.com/profile/GOATWU" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>GoatWu的codeforces</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
+              <a href="https://codeforces.com/profile/DWAE86" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>csz的codeforces</a>
             </li>
           
             <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
+              <a href="https://codeforces.com/profile/wh0816" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>wh的codeforces</a>
             </li>
           
         </ul>
@@ -559,7 +570,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;center&gt;XMU ACMer&lt;center/&gt;&lt;br/&gt;</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">&lt;center&gt;XMU ACMer&lt;center/&gt;&lt;br/&gt;Kindergarten 的数学选手</div>
   	  	
     	</section>
     
