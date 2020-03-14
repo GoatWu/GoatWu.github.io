@@ -33,6 +33,10 @@ rss: /atom.xml
 # 请将您的 url 设为 http://yoursite.com/blog 并把 root 设为 /blog/。
 root: /
 
+# 字数统计与阅读量
+word_count: True
+busuanzi:
+ enable: true
 # Content
 
 # 文章太长，截断按钮文字

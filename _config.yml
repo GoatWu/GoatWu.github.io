@@ -13,7 +13,7 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://yoursite.com
+url: https://goatwu.com
 root: /
 permalink: post/:abbrlink.html
 abbrlink:
@@ -103,8 +103,9 @@ theme: yilia
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: https://github.com/GoatWu/GoatWu.github.io.git
-  branch: master
+  repo: 
+    coding: git@goatwu.coding.net:goatwu/blog.git,master
+    github: git@github.com:GoatWu/GoatWu.github.io.git,master
 
 
 # yilia settings
